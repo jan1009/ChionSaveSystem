@@ -81,9 +81,21 @@ The component also exposes the events **On Save State Saving** and **On Save Sta
 
 ![Main Blueprint Nodes](Docs/Images/main-blueprint-nodes.png)
 
+## Persistent Save ID
+
+Placed level Actors automatically receive a persistent `SaveId` (GUID).
+
+This GUID is used to identify the same Actor across save and load operations, including after restarting the editor or reloading the level.
+
+The Save ID remains stable for the Actor instance. Duplicated Actors receive their own new Save ID.
+
+The **CopySaveIdToClipboard** button can be used to copy the GUID for debugging or verification.
+
+![Persistent Save ID](Docs/Images/persistent-save-id.png)
+
 ## Save Keys
 
-Placed level Actors normally use an automatically generated persistent GUID.
+Placed level Actors normally use their automatically generated persistent GUID.
 
 For Actors that should use a stable logical identifier instead, such as the Player, set a unique Save Key, for example:
 
