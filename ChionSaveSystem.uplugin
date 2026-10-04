@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.1",
+	"Version": 2,
+	"VersionName": "1.2.0",
 	"FriendlyName": "ChionSaveSystem",
 	"Description": "Automatic SaveGame property serialization and world state persistence for Unreal Engine 5.",
 	"Category": "Other",
@@ -18,6 +18,11 @@
 		{
 			"Name": "ChionSaveSystem",
 			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		},
+		{
+			"Name": "ChionSaveSystemEditor",
+			"Type": "Editor",
 			"LoadingPhase": "Default"
 		}
 	]

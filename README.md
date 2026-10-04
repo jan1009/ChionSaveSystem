@@ -19,6 +19,7 @@ ChionSaveSystem is designed for Blueprint projects that need persistent Actor st
 - Blueprint-only game projects supported
 - No project-side C++ code required
 - Generic INI-based float configuration save/load
+- Optional editor-only update checks through GitHub Releases
 
 ## Compatibility
 
@@ -136,12 +137,14 @@ This can be used to update components, visuals, animations, or other runtime sta
 
 ## Config Values
 
-Starting with **v1.1.0**, ChionSaveSystem also provides simple Blueprint nodes for storing float values in custom INI files.
+Starting with **v1.1.0**, ChionSaveSystem provides simple Blueprint nodes for storing float values in custom INI files.
 
 Available nodes:
 
 - `Save Config Float`
 - `Load Config Float`
+
+![Config Float Nodes](Docs/Images/config-float-nodes.png)
 
 Example:
 
@@ -163,6 +166,41 @@ with content similar to:
 
 These config nodes are independent from `Save World` / `Load World` and are useful for persistent global settings such as audio, gameplay, or UI preferences.
 
+## Optional Update Checks
+
+Starting with **v1.2.0**, ChionSaveSystem includes an editor-only update checker.
+
+It can be enabled under:
+
+    Project Settings
+    → Plugins
+    → Chion Save System
+    → Check for Updates
+
+![Update Check Settings](Docs/Images/update-check-settings.png)
+
+When enabled, the plugin checks the GitHub Releases API once when the Unreal Editor starts.
+
+If a newer release is available, a notification appears in the editor with a direct **Open Release Page** link.
+
+The update checker:
+
+- is disabled by default
+- runs only in the Unreal Editor
+- does not run in packaged games
+- does not download or install updates automatically
+- does not transmit project data or telemetry
+- only requests the latest release information from the public GitHub Releases API
+
+## Module Structure
+
+ChionSaveSystem contains two Unreal Engine modules:
+
+- `ChionSaveSystem` — Runtime module containing save/load and config functionality
+- `ChionSaveSystemEditor` — Editor-only module containing update settings, GitHub release checks, and editor notifications
+
+The editor module is not loaded in packaged games.
+
 ## Advanced Blueprint Nodes
 
 ChionSaveSystem also exposes lower-level Blueprint functionality:
@@ -178,7 +216,7 @@ These nodes are not required for normal Save/Load usage.
 
 ## Current Scope
 
-The current release focuses on placed level Actors using persistent GUIDs, stable logical Actors using Save Keys, Blueprint variables marked with `SaveGame`, persistent destroyed Actor state, optional Actor Transform persistence, and generic float config persistence.
+The current release focuses on placed level Actors using persistent GUIDs, stable logical Actors using Save Keys, Blueprint variables marked with `SaveGame`, persistent destroyed Actor state, optional Actor Transform persistence, generic float config persistence, and optional editor-only update notifications.
 
 General-purpose persistence for arbitrary runtime-spawned Actors, such as dropped inventory items that must survive across game restarts, is not part of this release.
 
