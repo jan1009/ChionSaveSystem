@@ -18,6 +18,7 @@ ChionSaveSystem is designed for Blueprint projects that need persistent Actor st
 - Duplicate `SaveKey` detection
 - Blueprint-only game projects supported
 - No project-side C++ code required
+- Generic INI-based float configuration save/load
 
 ## Compatibility
 
@@ -133,6 +134,35 @@ Called after the Actor state has been restored.
 
 This can be used to update components, visuals, animations, or other runtime state after loading.
 
+## Config Values
+
+Starting with **v1.1.0**, ChionSaveSystem also provides simple Blueprint nodes for storing float values in custom INI files.
+
+Available nodes:
+
+- `Save Config Float`
+- `Load Config Float`
+
+Example:
+
+    File Name: SoundSettings
+    Section: Audio
+    Key: Music
+    Value: 0.75
+
+This creates or updates:
+
+    Project/Saved/Config/SoundSettings.ini
+
+with content similar to:
+
+    [Audio]
+    Music=0.750000
+
+`Load Config Float` also supports a default value that is returned when the file, section, or key does not exist.
+
+These config nodes are independent from `Save World` / `Load World` and are useful for persistent global settings such as audio, gameplay, or UI preferences.
+
 ## Advanced Blueprint Nodes
 
 ChionSaveSystem also exposes lower-level Blueprint functionality:
@@ -148,9 +178,9 @@ These nodes are not required for normal Save/Load usage.
 
 ## Current Scope
 
-The current release focuses on placed level Actors using persistent GUIDs, stable logical Actors using Save Keys, Blueprint variables marked with `SaveGame`, persistent destroyed Actor state, and optional Actor Transform persistence.
+The current release focuses on placed level Actors using persistent GUIDs, stable logical Actors using Save Keys, Blueprint variables marked with `SaveGame`, persistent destroyed Actor state, optional Actor Transform persistence, and generic float config persistence.
 
-General-purpose persistence for arbitrary runtime-spawned Actors, such as dropped inventory items that must survive across game restarts, is not part of this first release.
+General-purpose persistence for arbitrary runtime-spawned Actors, such as dropped inventory items that must survive across game restarts, is not part of this release.
 
 ## License
 
